@@ -38,28 +38,42 @@ defmodule JsonCollabEditTest.UserController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get!(User, id)
-    changeset = User.changeset(user, user_params)
-
-    case Repo.update(changeset) do
-      {:ok, user} ->
+    if !conn.assigns[:current_user] do
+      conn
+      |> put_flash(:error, "Y U NO LOG IN!?!")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    else
+      if conn.assigns[:current_user].id != id do
         conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        |> put_flash(:error, "Y U TRY HACK!?!  GO TO JAIL NOW BAD PERSON")
+        |> redirect(to: page_path(conn, :index))
+        |> halt()
+      else
+        user = Repo.get!(User, id)
+        changeset = User.changeset(user, user_params)
+
+        case Repo.update(changeset) do
+          {:ok, user} ->
+            conn
+            |> put_flash(:info, "User updated successfully.")
+            |> redirect(to: user_path(conn, :show, user))
+          {:error, changeset} ->
+            render(conn, "edit.html", user: user, changeset: changeset)
+        end
+      end
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(user)
-
+    # user = Repo.get!(User, id)
+    #
+    # # Here we use delete! (with a bang) because we expect
+    # # it to always work (and if it does not, it will raise).
+    # Repo.delete!(user)
+    #
     conn
-    |> put_flash(:info, "User deleted successfully.")
+    # |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
 
