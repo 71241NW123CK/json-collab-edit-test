@@ -19,21 +19,12 @@ defmodule JsonCollabEditTest.EditorDocumentController do
     changeset = EditorDocument.changeset(%EditorDocument{}, editor_document_params)
     changeset = Ecto.Changeset.put_embed(changeset, :past_user_deltas, [])
     changeset = Ecto.Changeset.put_embed(changeset, :future_user_deltas, [])
-    # Logger.debug changeset
     case Repo.insert(changeset) do
       {:ok, _editor_document} ->
         conn
         |> put_flash(:info, "Editor document created successfully.")
         |> redirect(to: editor_document_path(conn, :index))
       {:error, changeset} ->
-        # Logger.debug "OH NOES!"
-        # Logger.debug changeset
-        query =
-          User
-          |> User.alphabetical_by_username
-          |> User.usernames_and_ids
-        users = Repo.all query
-        assign(conn, :users, users)
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -75,7 +66,7 @@ defmodule JsonCollabEditTest.EditorDocumentController do
     |> redirect(to: editor_document_path(conn, :index))
   end
 
-  plug :load_users when action in [:new, :edit]
+  plug :load_users when action in [:new, :edit, :create]
 
   def load_users(conn, _) do
     query =
