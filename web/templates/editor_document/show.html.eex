@@ -1,0 +1,23 @@
+<h2>Show editor document</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @editor_document.title %>
+  </li>
+
+  <li>
+    <strong>Document:</strong>
+    <%= @editor_document.document %>
+  </li>
+
+  <li>
+    <strong>Owner:</strong>
+    <%= @editor_document.owner_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: editor_document_path(@conn, :edit, @editor_document) %>
+<%= link "Back", to: editor_document_path(@conn, :index) %>

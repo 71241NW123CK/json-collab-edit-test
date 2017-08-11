@@ -38,4 +38,12 @@ defmodule JsonCollabEditTest.User do
         changeset
     end
   end
+
+  def alphabetical_by_username(query) do
+    from user in query, order_by: user.username
+  end
+
+  def usernames_and_ids(query) do
+    from user in query, select: {user.username, user.id}
+  end
 end

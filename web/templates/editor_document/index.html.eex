@@ -1,0 +1,30 @@
+<h2>Listing editor documents</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Document</th>
+      <th>Owner</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for editor_document <- @editor_documents do %>
+    <tr>
+      <td><%= editor_document.title %></td>
+      <td><%= editor_document.document %></td>
+      <td><%= editor_document.owner_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: editor_document_path(@conn, :show, editor_document), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: editor_document_path(@conn, :edit, editor_document), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: editor_document_path(@conn, :delete, editor_document), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New editor document", to: editor_document_path(@conn, :new) %>

@@ -20,6 +20,7 @@ defmodule JsonCollabEditTest.Router do
     get "/", PageController, :index
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+    resources "/editor_documents", EditorDocumentController
   end
 
   # Other scopes may use custom stacks.
