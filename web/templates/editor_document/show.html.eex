@@ -19,5 +19,7 @@
 
 </ul>
 
+<div id="embed_elm_json_editor" userid="1" documentid="<%= @editor_document.id %>"></div>
+
 <%= link "Edit", to: editor_document_path(@conn, :edit, @editor_document) %>
 <%= link "Back", to: editor_document_path(@conn, :index) %>

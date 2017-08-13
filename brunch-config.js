@@ -54,7 +54,7 @@ exports.config = {
   plugins: {
     elmBrunch: {
       elmFolder: 'web/elm',
-      mainModules: ['ElmTest.elm'],
+      mainModules: ['ElmTest.elm', 'JsonEditor.elm'],
       outputFolder: '../static/js/',
       outputFile: 'elm.js'
     },

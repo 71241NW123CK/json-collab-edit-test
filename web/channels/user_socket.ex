@@ -2,7 +2,7 @@ defmodule JsonCollabEditTest.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", JsonCollabEditTest.RoomChannel
+  channel "editor:*", JsonCollabEditTest.EditorChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

@@ -27,4 +27,20 @@ if (elmTestElmDiv) {
   Elm.ElmTest.embed(elmTestElmDiv);
 }
 
+const jsonEditorElmDiv = document.querySelector('#embed_elm_json_editor');
+if (jsonEditorElmDiv) {
+  var userId = '0'
+  if (jsonEditorElmDiv.attributes['userid']) {
+    userId = jsonEditorElmDiv.attributes['userid'].value;
+  }
+  var documentId = '0'
+  if (jsonEditorElmDiv.attributes['documentid']) {
+    documentId = jsonEditorElmDiv.attributes['documentid'].value
+  }
+  Elm.JsonEditor.embed(jsonEditorElmDiv, {
+    userId: userId,
+    documentId: documentId
+  });
+}
+
 // etc. for other modules.

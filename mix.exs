@@ -39,6 +39,7 @@ defmodule JsonCollabEditTest.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 3.0"},
+     {:poison, "~> 2.0"},
      {:expatch, "~> 0.1.0"}]
   end
 
